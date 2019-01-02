@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum pressType //a = outerLeft b = innerLeft c = middle d = innerRight e = outerRight, a combo means both
 {
+    NULL,
     a,
     b,
     c,
@@ -23,8 +24,8 @@ public enum pressType //a = outerLeft b = innerLeft c = middle d = innerRight e 
 
 public struct noteInfo
 {
-    bool isNote;
-    int noteLength;
-    pressType pT;
-
+    public bool isNote;
+    //public bool isHeld // in case we want holdin notes, (no Im not doing notes held in parallel for different durations, too annoying sounding)
+    public int noteLength; //number of beatFractions til next note, 
+    public pressType pT;
 }

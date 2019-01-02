@@ -22,9 +22,9 @@ public class readnwrite
     }
 
     [MenuItem("Tools/Read file")]
-    public static string ReadString()
+    public static string ReadString(string path)
     {
-        string path = "Assets/Resources/test.txt";
+        //string path = "Assets/Resources/test.txt";
 
         //Read the text from directly from the test.txt file
         StreamReader reader = new StreamReader(path);
