@@ -12,6 +12,7 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake() {
 
+        // Background music doesnt change/stop when switching from start menu to game
         if (instance == null)
             instance = this;
         else {
@@ -21,6 +22,7 @@ public class AudioManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
+        // copies mp3 attributes into audio manager
         foreach (Sound s in sounds) {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
@@ -30,12 +32,14 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    // previews audio file
     public void Play (string name) {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null) {
             Debug.LogWarning("Sound: " + name + " not found");
             return;
         }
+
         s.source.Play();
     }
 }
