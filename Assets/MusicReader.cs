@@ -17,7 +17,7 @@ public class MusicReader : MonoBehaviour
 
     AudioManager AM;
 
-    private void Start()
+    private void nStart()
     {
         string path = "Assets/Resources/test.txt";
         compileMusic(path);
