@@ -1,4 +1,5 @@
 16
+24
 0 16 no 1
 0 16 no 2
 0 16 no 3
@@ -58,4 +59,60 @@
 1 2 ab
 1 2 ab
 1 2 ab
-
+1 1 ab 17
+1 1 ab
+1 1 ab
+1 1 ab
+1 4 ab
+1 4 ab
+1 4 ab
+1 2 ab 18
+1 2 ab
+1 4 ab
+1 1 ab
+1 1 ab
+1 1 ab
+1 1 ab
+1 2 ab
+1 2 ab
+1 2 ab 19
+1 2 ab
+1 2 ab
+1 2 ab
+1 4 ab
+1 4 ab
+1 1 a 20
+1 1 a
+1 1 a
+1 1 a
+1 1 a
+1 1 a
+1 1 a
+1 1 a
+1 1 ab
+1 1 ab
+1 1 ab
+1 1 ab
+1 2 ab
+1 2 ab
+1 4 ab 21
+1 4 ab
+1 4 ab
+1 4 ab
+1 4 ab 22
+1 4 ab
+1 4 ab
+1 2 ab
+1 2 ab 
+1 2 ab 23
+1 2 ab
+1 2 ab
+1 2 ab
+1 4 ab
+1 4 ab
+1 4 ab 24
+1 4 ab
+1 2 ab
+1 2 ab
+1 2 ab
+1 2 ab
