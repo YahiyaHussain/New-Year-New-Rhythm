@@ -49,6 +49,11 @@ public class PauseMenu : MonoBehaviour {
 
     public void LoadMenu() {
       Debug.Log("Loading menu...");
+      GMS = GameObject.Find("GameManager").GetComponent<GameManagerScript>();
+      if (!GMS.countDownDone) {
+        GMS.countDownDone = true;
+        GMS.countDownImage.SetActive(false);
+      }
       Time.timeScale = 1f;
       // Once main menu is ready
       // file/build settings/scenes to build
