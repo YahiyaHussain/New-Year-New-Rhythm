@@ -9,6 +9,8 @@ public class PauseMenu : MonoBehaviour {
 
     public GameObject pauseMenuUI;
 
+    private GameManagerScript GMS;
+
     // Update is called once per frame
     // pause and resume game using esc
     void Update() {
@@ -23,13 +25,23 @@ public class PauseMenu : MonoBehaviour {
 
     // resume function
     public void Resume() {
-      pauseMenuUI.SetActive(false);
-      Time.timeScale = 1f;
-      GameIsPaused = false;
+      GMS = GameObject.Find("GameManager").GetComponent<GameManagerScript>();
+      GMS.countDownImage.SetActive(true);
+      if (GMS.countDownDone) {
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        GameIsPaused = false;
+      } else {
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        GameIsPaused = false;
+      }
     }
 
     // pause function
     void Pause() {
+      GMS = GameObject.Find("GameManager").GetComponent<GameManagerScript>();
+      GMS.countDownDone = false;
       pauseMenuUI.SetActive(true);
       Time.timeScale = 0f;
       GameIsPaused = true;
