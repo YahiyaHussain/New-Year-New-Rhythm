@@ -10,22 +10,13 @@ public enum pressType //a = outerLeft b = innerLeft c = middle d = innerRight e 
     c,
     d,
     e,
-    ab,
-    ac,
-    ad,
-    ae,
-    bc,
-    bd,
-    be,
-    cd,
-    ce,
-    de
 }
 
 public struct noteInfo
 {
     public bool isNote;
     //public bool isHeld // in case we want holdin notes, (no Im not doing notes held in parallel for different durations, too annoying sounding)
-    public int noteLength; //number of beatFractions til next note, 
-    public pressType pT;
+    public float noteLength; //time in seconds of note
+    public pressType[] pT;
+    public float songPos;
 }

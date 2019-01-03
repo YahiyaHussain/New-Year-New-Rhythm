@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class MusicReader : MonoBehaviour
 {
+    public static MusicReader Instance { get; private set; }
+    void Awake()
+    {
+        if (Instance == null) { Instance = this; } else { Debug.Log("Warning: multiple " + this + " in scene!"); }
+    }
     int nMeasures;
     float secondsPerMeasure = 2f;
     int nBeatFractions;
@@ -16,28 +21,75 @@ public class MusicReader : MonoBehaviour
     bool[] OuterRightNotes;
 
     AudioManager AM;
-
-    private void nStart()
+    public MoveObjectTime[] MOTS;
+    public Transform[] Dests;
+    public void readNspawn()
     {
         string path = "Assets/Resources/test.txt";
         compileMusic(path);
         AM = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         StartCoroutine(playMusic());
+        StartCoroutine(spawnBlocks());
     }
-
-    IEnumerator playMusic()
+    IEnumerator spawnBlocks()
     {
         foreach(noteInfo nI in music)
+        {
+            float f = (float)AudioSettings.dspTime;
+            if (nI.isNote)
+            {            
+                foreach (pressType pT in nI.pT)
+                {
+                    int index = 0;
+                    MoveObjectTime t = null;
+                    switch (pT)
+                    {
+                        case pressType.a:
+                            index = 0;
+                            break;
+                        case pressType.b:
+                            index = 1;
+                            break;
+                        case pressType.c:
+                            index = 2;
+                            break;
+                        case pressType.d:
+                            index = 3;
+                            break;
+                        case pressType.e:
+                            index = 4;
+                            break;
+                    }
+                    t = MOTS[index];
+                    MOTS[index].myInfo = nI;
+                    MOTS[index].myType = pT;
+                    StartCoroutine(t.MoveToPosition(Dests[index].position, 2));
+                    //Debug.Log((float)AudioSettings.dspTime - f);                                     
+                }
+                yield return new WaitForSeconds(nI.noteLength - (float)AudioSettings.dspTime + f);
+            }
+            else
+            {
+                //Debug.Log(Time.time - f);
+                yield return new WaitForSeconds(nI.noteLength - (float)AudioSettings.dspTime + f);
+            }
+        }
+    }
+    IEnumerator playMusic()
+    {
+        yield return new WaitForSeconds(2);
+        StartCoroutine(Conductor.Instance.startConducting());
+        foreach (noteInfo nI in music)
         {
             if (nI.isNote)
             {
                 AM.Play("test");
-                Debug.Log("hello");
-                yield return new WaitForSeconds((nI.noteLength / (float)nBeatFractions) * secondsPerMeasure);
+                //Debug.Log("hello");
+                yield return new WaitForSeconds(nI.noteLength);
             }
             else
             {
-                yield return new WaitForSeconds((nI.noteLength / (float)nBeatFractions) * secondsPerMeasure);
+                yield return new WaitForSeconds(nI.noteLength);
             }
         }
     }
@@ -50,7 +102,7 @@ public class MusicReader : MonoBehaviour
         nMeasures = int.Parse(lines[1]);
         music = new noteInfo[lines.Length - 2];
         string[] tempLine;
-
+        float pressTime = 0;
         for (int i = 2; i < lines.Length;i++)
         {
 
@@ -62,57 +114,92 @@ public class MusicReader : MonoBehaviour
             if (tempLine[0].Equals("1"))
             {
                 music[i - 2].isNote = true;
-                music[i - 2].noteLength = int.Parse(tempLine[1]);
-                pressType t = pressType.NULL;
-                switch (tempLine[2])
+                string a = tempLine[2];
+                if (a[a.Length - 1] == '\n' || a[a.Length - 1] == 13)
+                {
+                    a = a.Substring(0, a.Length - 1);
+                }
+                else
+                {
+                }
+                pressType[] t = null;
+                switch (a)
                 {
                     #region cases
                     case "a":
-                        t = pressType.a;
+                        t = new pressType[1];
+                        t[0] = pressType.a;
                         break;
                     case "b":
-                        t = pressType.b;
+                        t = new pressType[1];
+                        t[0] = pressType.b;
                         break;
                     case "c":
-                        t = pressType.c;
+                        t = new pressType[1];
+                        t[0] = pressType.c;
                         break;
                     case "d":
-                        t = pressType.d;
+                        t = new pressType[1];
+                        t[0] = pressType.d;
                         break;
                     case "e":
-                        t = pressType.e;
+                        t = new pressType[1];
+                        t[0] = pressType.e;
                         break;
                     case "ab":
-                        t = pressType.ab;
+                        t = new pressType[2];
+                        t[0] = pressType.a;
+                        t[1] = pressType.b;
                         break;
                     case "ac":
-                        t = pressType.ac;
+                        t = new pressType[2];
+                        t[0] = pressType.a;
+                        t[1] = pressType.c;
                         break;
                     case "ad":
-                        t = pressType.ad;
+                        t = new pressType[2];
+                        t[0] = pressType.a;
+                        t[1] = pressType.d;
                         break;
                     case "ae":
-                        t = pressType.ae;
+                        t = new pressType[2];
+                        t[0] = pressType.a;
+                        t[1] = pressType.e;
                         break;
                     case "bc":
-                        t = pressType.bc;
+                        t = new pressType[2];
+                        t[0] = pressType.b;
+                        t[1] = pressType.c;
                         break;
                     case "bd":
-                        t = pressType.bd;
+                        t = new pressType[2];
+                        t[0] = pressType.b;
+                        t[1] = pressType.d;
                         break;
                     case "be":
-                        t = pressType.be;
+                        t = new pressType[2];
+                        t[0] = pressType.b;
+                        t[1] = pressType.e;
                         break;
                     case "cd":
-                        t = pressType.cd;
+                        t = new pressType[2];
+                        t[0] = pressType.c;
+                        t[1] = pressType.d;
                         break;
                     case "ce":
-                        t = pressType.ce;
+                        t = new pressType[2];
+                        t[0] = pressType.c;
+                        t[1] = pressType.e;
                         break;
                     case "de":
-                        t = pressType.de;
+                        t = new pressType[2];
+                        t[0] = pressType.d;
+                        t[1] = pressType.e;
                         break;
-                        #endregion
+                    #endregion
+                    default:
+                        t = null;
+                        break;
                 }
                 music[i - 2].pT = t;
             }
@@ -122,8 +209,10 @@ public class MusicReader : MonoBehaviour
                 //Debug.Log(measureCount);
 
                 //string s = tempLine[1];
-                music[i - 2].noteLength = int.Parse(tempLine[1]);
             }
+            music[i - 2].noteLength = (int.Parse(tempLine[1]) / (float)nBeatFractions) * secondsPerMeasure;
+            pressTime += music[i - 2].noteLength;
+            music[i - 2].songPos = pressTime;
         }
     }
 
