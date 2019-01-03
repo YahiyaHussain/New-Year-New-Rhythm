@@ -26,11 +26,11 @@ public class MusicReader : MonoBehaviour
 
 
     noteInfo[] q;
-    public void readNspawn()
+    public void readNspawn(TextAsset t, string song)
     {
         
         string path = "Assets/Resources/BnBeasy.txt";
-        compileMusic(path);
+        compileMusic(t);
         q = new noteInfo[music.Length];
         for (int i = 0; i < music.Length; i++)
         {
@@ -41,7 +41,7 @@ public class MusicReader : MonoBehaviour
         //StartCoroutine(playMusicBetter());
         //AM.Play("BlipsandBlops");
         //StartCoroutine(waitThenPlay());
-        StartCoroutine(Conductor.Instance.startConducting(0));
+        StartCoroutine(Conductor.Instance.startConducting(0, song));
         Conductor.Instance.sendblocks = true;
         Conductor.Instance.playmusic = true;
         //StartCoroutine(spawnBlocks());
@@ -103,45 +103,11 @@ public class MusicReader : MonoBehaviour
             }
         }
     }
-    IEnumerator playMusic()
-    {
-        yield return new WaitForSeconds(2);
-        StartCoroutine(Conductor.Instance.startConducting(0));
-        foreach (noteInfo nI in music)
-        {
-            if (nI.isNote)
-            {
-                AM.Play("test");
-                //Debug.Log("hello");
-                yield return new WaitForSeconds(nI.noteLength);
-            }
-            else
-            {
-                yield return new WaitForSeconds(nI.noteLength);
-            }
-        }
-    }
     
-    IEnumerator playMusicBetter()
-    {
-        yield return new WaitForSeconds(2);
-        StartCoroutine(Conductor.Instance.startConducting(0));
-        int i = 0;
-        while (i < q.Length)
-        {
-            noteInfo nI = q[i];
-            yield return new WaitUntil(() => nI.songPos < Conductor.Instance.songPositions[0]);
-            if (nI.isNote)
-            {
-                AM.Play("test");
-            }
-            i++;
-        }
-    }
 
-    private void compileMusic(string path)
+    private void compileMusic(TextAsset text)
     {
-        string data = BnBeasy.text;
+        string data = text.text;
         string[] lines = data.Split('\n');
         nBeatFractions = int.Parse(lines[0]);
         nMeasures = int.Parse(lines[1]);

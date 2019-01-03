@@ -25,7 +25,7 @@ public class Conductor : MonoBehaviour
     int i = 0;
     int j = 0;
     noteInfo nI;
-
+    string song;
     private void Update()
     {
 
@@ -33,7 +33,7 @@ public class Conductor : MonoBehaviour
         {
             if (i == 0)
             {
-                AudioManager.instance.Play("BlipsandBlops");
+                AudioManager.instance.Play(song);
             }
             if (MusicReader.Instance.music[i].isNote)
             {
@@ -94,8 +94,9 @@ public class Conductor : MonoBehaviour
         
     }
     // Update is called once per frame
-    public IEnumerator startConducting(int i)
+    public IEnumerator startConducting(int i, string s)
     {
+        song = s;
         float dsptimesong = (float)AudioSettings.dspTime;
         while (true)
         {

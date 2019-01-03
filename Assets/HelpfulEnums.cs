@@ -12,6 +12,13 @@ public enum pressType //a = outerLeft b = innerLeft c = middle d = innerRight e 
     e,
 }
 
+public enum beatmap
+{
+    BnbMedium,
+    BnBEasy,
+    BnbHard
+}
+
 public struct noteInfo
 {
     public bool isNote;
