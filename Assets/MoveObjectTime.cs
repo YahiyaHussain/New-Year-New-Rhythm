@@ -36,8 +36,8 @@ public class MoveObjectTime : MonoBehaviour
 
     public IEnumerator MoveToPosition(Vector3 position, float timeToMove)
     {
-        position = 2 * position - transform.position;
-        timeToMove = 2 * timeToMove;
+        position =  .1f*(position - transform.position) + position;
+        timeToMove = 1.1f * timeToMove;
         float f = (float)AudioSettings.dspTime;
         if (isCurrentlyMoving)
         {
@@ -74,6 +74,10 @@ public class MoveObjectTime : MonoBehaviour
             case pressType.e:
                 s = "E";
                 break;
+        }
+        if (transform.localScale.magnitude > 0.1f)
+        {
+            GameManagerScript.Instance.hitNote(transform, targetObject.transform);
         }
         ObjectPooler.Instance.poolDictionary[s].Enqueue(gameObject);
         isCurrentlyMoving = false;
