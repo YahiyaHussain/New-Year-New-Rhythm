@@ -20,7 +20,7 @@ public class pressKey : MonoBehaviour
             Collider[] c = Physics.OverlapBox(transform.position, 0.5f * Vector3.one);
             if (c.Length > 0)
             {
-                GameManagerScript.Instance.hitNote(c[0].transform);
+                GameManagerScript.Instance.hitNote(c[0].transform, transform);
             }
         }
         if (Input.GetKeyUp(k))

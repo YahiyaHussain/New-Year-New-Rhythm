@@ -214,6 +214,7 @@ public class MusicReader : MonoBehaviour
             pressTime += music[i - 2].noteLength;
             music[i - 2].songPos = pressTime;
         }
+        Debug.Log(music[music.Length - 1].songPos);
     }
 
 }

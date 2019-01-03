@@ -40,13 +40,13 @@ public class GameManagerScript : MonoBehaviour
            
     }
 
-    public void hitNote(Transform note)
+    public void hitNote(Transform note, Transform key)
     {
         note.localScale = new Vector3(1, 0.5f, 1);
         MoveObjectTime MOT = note.GetComponent<MoveObjectTime>();
 
-        Debug.Log(MOT.myInfo.songPos - Conductor.Instance.songPosition);
-        float score = Mathf.Abs(MOT.myInfo.songPos - Conductor.Instance.songPosition);
+        Debug.Log(note.position.sqrMagnitude - key.position.sqrMagnitude);
+        float score = Mathf.Abs(note.position.sqrMagnitude - key.position.sqrMagnitude);
         if (score < 0.25)
         {
             Debug.Log("perfect");

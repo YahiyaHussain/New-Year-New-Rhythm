@@ -52,8 +52,8 @@ public class MoveObjectTime : MonoBehaviour
 
             yield return null;
         }
-        Debug.Log((float)AudioSettings.dspTime - f);
-        Debug.Log(myInfo.songPos - Conductor.Instance.songPosition);
+        //Debug.Log((float)AudioSettings.dspTime - f);
+        //Debug.Log(myInfo.songPos - Conductor.Instance.songPosition);
         transform.position = origPos;
         isCurrentlyMoving = false;
     }
