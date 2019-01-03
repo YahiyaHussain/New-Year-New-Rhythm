@@ -7,7 +7,7 @@ public class MoveObjectTime : MonoBehaviour
 {
     public noteInfo myInfo;
     public pressType myType;
-    private Vector3 origPos;
+    public Vector3 origPos;
     [Tooltip("Time the object should take to reach the specified target.")]
     public float timeToReachTarget;
 
@@ -36,6 +36,8 @@ public class MoveObjectTime : MonoBehaviour
 
     public IEnumerator MoveToPosition(Vector3 position, float timeToMove)
     {
+        position = 2 * position - transform.position;
+        timeToMove = 2 * timeToMove;
         float f = (float)AudioSettings.dspTime;
         if (isCurrentlyMoving)
         {
@@ -54,7 +56,27 @@ public class MoveObjectTime : MonoBehaviour
         }
         //Debug.Log((float)AudioSettings.dspTime - f);
         //Debug.Log(myInfo.songPos - Conductor.Instance.songPosition);
-        transform.position = origPos;
+        string s = "";
+        switch (myType)
+        {
+            case pressType.a:
+                s = "A";
+                break;
+            case pressType.b:
+                s = "B";
+                break;
+            case pressType.c:
+                s = "C";
+                break;
+            case pressType.d:
+                s = "D";
+                break;
+            case pressType.e:
+                s = "E";
+                break;
+        }
+        ObjectPooler.Instance.poolDictionary[s].Enqueue(gameObject);
         isCurrentlyMoving = false;
+        gameObject.SetActive(false);
     }
 }

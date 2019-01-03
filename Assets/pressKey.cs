@@ -22,6 +22,7 @@ public class pressKey : MonoBehaviour
             {
                 GameManagerScript.Instance.hitNote(c[0].transform, transform);
             }
+            AudioManager.Instance.Play("test");
         }
         if (Input.GetKeyUp(k))
         {

@@ -9,10 +9,11 @@ public class MusicReader : MonoBehaviour
     {
         if (Instance == null) { Instance = this; } else { Debug.Log("Warning: multiple " + this + " in scene!"); }
     }
+    public Transform[] startingPositions;
     int nMeasures;
     float secondsPerMeasure = 2f;
     int nBeatFractions;
-    noteInfo[] music; // false means no sound is played then, true means there is
+    public noteInfo[] music; // false means no sound is played then, true means there is
 
     bool[] OuterLeftNotes;
     bool[] InnerLeftNotes;
@@ -23,13 +24,32 @@ public class MusicReader : MonoBehaviour
     AudioManager AM;
     public MoveObjectTime[] MOTS;
     public Transform[] Dests;
+
+    noteInfo[] q;
     public void readNspawn()
     {
+        
         string path = "Assets/Resources/test.txt";
         compileMusic(path);
-        AM = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
-        StartCoroutine(playMusic());
+        q = new noteInfo[music.Length];
+        for (int i = 0; i < music.Length; i++)
+        {
+            q[0] = music[0];
+        }
+
+        AM = AudioManager.Instance;
+        //StartCoroutine(playMusicBetter());
+        //AM.Play("BlipsandBlops");
+        StartCoroutine(waitThenPlay());
         StartCoroutine(spawnBlocks());
+    }
+
+    IEnumerator waitThenPlay()
+    {
+        yield return new WaitForSeconds(2);
+        AM.Play("BlipsandBlops");
+        StartCoroutine(Conductor.Instance.startConducting());
+        Conductor.Instance.playmusic = true;
     }
     IEnumerator spawnBlocks()
     {
@@ -45,25 +65,31 @@ public class MusicReader : MonoBehaviour
                     switch (pT)
                     {
                         case pressType.a:
-                            index = 0;
+                            t = ObjectPooler.Instance.poolDictionary["A"].Dequeue().GetComponent<MoveObjectTime>();
+                            t.transform.position = startingPositions[0].position;
                             break;
                         case pressType.b:
-                            index = 1;
+                            t = ObjectPooler.Instance.poolDictionary["B"].Dequeue().GetComponent<MoveObjectTime>();
+                            t.transform.position = startingPositions[1].position;
                             break;
                         case pressType.c:
-                            index = 2;
+                            t = ObjectPooler.Instance.poolDictionary["C"].Dequeue().GetComponent<MoveObjectTime>();
+                            t.transform.position = startingPositions[2].position;
                             break;
                         case pressType.d:
-                            index = 3;
+                            t = ObjectPooler.Instance.poolDictionary["D"].Dequeue().GetComponent<MoveObjectTime>();
+                            t.transform.position = startingPositions[3].position;
                             break;
                         case pressType.e:
-                            index = 4;
+                            t = ObjectPooler.Instance.poolDictionary["E"].Dequeue().GetComponent<MoveObjectTime>();
+                            t.transform.position = startingPositions[4].position;
                             break;
                     }
-                    t = MOTS[index];
-                    MOTS[index].myInfo = nI;
-                    MOTS[index].myType = pT;
-                    StartCoroutine(t.MoveToPosition(Dests[index].position, 2));
+                    t.myInfo = nI;
+                    t.myType = pT;
+                    t.gameObject.SetActive(true);
+                    
+                    StartCoroutine(t.MoveToPosition(t.targetObject.transform.position, 2));
                     //Debug.Log((float)AudioSettings.dspTime - f);                                     
                 }
                 yield return new WaitForSeconds(nI.noteLength - (float)AudioSettings.dspTime + f);
@@ -91,6 +117,23 @@ public class MusicReader : MonoBehaviour
             {
                 yield return new WaitForSeconds(nI.noteLength);
             }
+        }
+    }
+    
+    IEnumerator playMusicBetter()
+    {
+        yield return new WaitForSeconds(2);
+        StartCoroutine(Conductor.Instance.startConducting());
+        int i = 0;
+        while (i < q.Length)
+        {
+            noteInfo nI = q[i];
+            yield return new WaitUntil(() => nI.songPos < Conductor.Instance.songPosition);
+            if (nI.isNote)
+            {
+                AM.Play("test");
+            }
+            i++;
         }
     }
 
@@ -211,8 +254,8 @@ public class MusicReader : MonoBehaviour
                 //string s = tempLine[1];
             }
             music[i - 2].noteLength = (int.Parse(tempLine[1]) / (float)nBeatFractions) * secondsPerMeasure;
-            pressTime += music[i - 2].noteLength;
             music[i - 2].songPos = pressTime;
+            pressTime += music[i - 2].noteLength;
         }
         Debug.Log(music[music.Length - 1].songPos);
     }

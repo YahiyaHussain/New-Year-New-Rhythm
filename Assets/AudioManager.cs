@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-
+    public static AudioManager Instance { get; private set; }
+    
     public Sound[] sounds;
 
     public static AudioManager instance;
 
     // Start is called before the first frame update
     void Awake() {
-
+        
+        if (Instance == null) { Instance = this; } else { Debug.Log("error too many " + name); }
+        
         // Background music doesnt change/stop when switching from start menu to game
         if (instance == null)
             instance = this;

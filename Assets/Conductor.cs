@@ -12,15 +12,28 @@ public class Conductor : MonoBehaviour
 
     public float bpm;
     public float crotchet;
-    public float offset;
+    public float offset = .2f;
     public float songPosition;
     public float pitch;
     // Start is called before the first frame update
+    public bool playmusic;
     void Start()
     {
         
     }
-
+    int i = 0;
+    noteInfo nI;
+    private void Update()
+    {
+        if (playmusic && i < MusicReader.Instance.music.Length && MusicReader.Instance.music[i].songPos < songPosition)
+        {
+            if (MusicReader.Instance.music[i].isNote)
+            {
+                AudioManager.instance.Play("test");
+            }
+            i++;
+        }
+    }
     // Update is called once per frame
     public IEnumerator startConducting()
     {
