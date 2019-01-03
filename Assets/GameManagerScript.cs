@@ -72,7 +72,6 @@ public class GameManagerScript : MonoBehaviour
         }
         else if(score < 12)
         {
-            streak = 0;
             rating.text = "bad";
         }
         else
