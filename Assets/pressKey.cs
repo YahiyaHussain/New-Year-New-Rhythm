@@ -17,7 +17,7 @@ public class pressKey : MonoBehaviour
         if (Input.GetKeyDown(k))
         {
             transform.localScale = new Vector3(1, .1f, 1);
-            Collider[] c = Physics.OverlapBox(transform.position, 0.5f * Vector3.one);
+            Collider[] c = Physics.OverlapBox(transform.position, 0.8f* Vector3.one);
             if (c.Length > 0)
             {
                 GameManagerScript.Instance.hitNote(c[0].transform, transform);

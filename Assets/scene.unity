@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -142,24 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a35737046f2ce409afadc1122ff372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingPositions:
-  - {fileID: 5551580676509382066}
-  - {fileID: 8670464831656979335}
-  - {fileID: 6881155386450315090}
-  - {fileID: 7720290974939668358}
-  - {fileID: 8941957911750442395}
-  MOTS:
-  - {fileID: 5551580676509382070}
-  - {fileID: 6444435593910451947}
-  - {fileID: 8903899185134536532}
-  - {fileID: 3018174897597926505}
-  - {fileID: 8281275295433529270}
-  Dests:
-  - {fileID: 5551580675675840197}
-  - {fileID: 5419567189957792127}
-  - {fileID: 3065321306419009417}
-  - {fileID: 2265019937381911636}
-  - {fileID: 5978392969852170778}
 --- !u!4 &151903334
 Transform:
   m_ObjectHideFlags: 0
@@ -189,8 +171,10 @@ MonoBehaviour:
   bpm: 120
   crotchet: 0.5
   offset: 0
-  songPosition: 0
+  songPositions: []
   pitch: 1
+  playmusic: 0
+  sendblocks: 0
 --- !u!1 &297225335
 GameObject:
   m_ObjectHideFlags: 0
@@ -1988,7 +1972,7 @@ MonoBehaviour:
   myType: 0
   origPos: {x: 0, y: 0, z: 0}
   timeToReachTarget: 2
-  targetObject: {fileID: 3859794309858943106}
+  targetObject: {fileID: 9148429920983141164}
 --- !u!4 &3065321306419009417
 Transform:
   m_ObjectHideFlags: 0
@@ -2353,7 +2337,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5551580676509382071}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4, y: 0.5, z: 20}
+  m_LocalPosition: {x: -4, y: 0.5, z: 40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2622,7 +2606,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8943663635467578997}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 20}
+  m_LocalPosition: {x: 0, y: 0.5, z: 40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2770,7 +2754,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3656992734558195015}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2, y: 0.5, z: 20}
+  m_LocalPosition: {x: 2, y: 0.5, z: 40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2807,7 +2791,7 @@ MonoBehaviour:
   myType: 0
   origPos: {x: 0, y: 0, z: 0}
   timeToReachTarget: 2
-  targetObject: {fileID: 5551580675675840201}
+  targetObject: {fileID: 3859794309858943106}
 --- !u!33 &8324148496230188051
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2824,7 +2808,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6154564830864327619}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2, y: 0.5, z: 20}
+  m_LocalPosition: {x: -2, y: 0.5, z: 40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2854,7 +2838,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3417213326801274773}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4, y: 0.5, z: 20}
+  m_LocalPosition: {x: 4, y: 0.5, z: 40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

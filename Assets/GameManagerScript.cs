@@ -42,24 +42,24 @@ public class GameManagerScript : MonoBehaviour
 
     public void hitNote(Transform note, Transform key)
     {
-        note.localScale = new Vector3(1, 0.5f, 1);
+        note.localScale = new Vector3(0, 0, 0);
         MoveObjectTime MOT = note.GetComponent<MoveObjectTime>();
 
         Debug.Log(note.position.sqrMagnitude - key.position.sqrMagnitude);
         float score = Mathf.Abs(note.position.sqrMagnitude - key.position.sqrMagnitude);
-        if (score < 0.25)
+        if (score <  3)
         {
             Debug.Log("perfect");
         }
-        else if(score < 0.4)
+        else if(score < 6)
         {
             Debug.Log("good");
         }
-        else if(score < 0.6)
+        else if(score < 9)
         {
             Debug.Log("ok");
         }
-        else if(score < 0.8)
+        else if(score < 12)
         {
             Debug.Log("bad");
         }
