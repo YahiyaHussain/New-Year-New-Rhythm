@@ -4,7 +4,6 @@ using System.IO;
 
 public class readnwrite
 {
-    [MenuItem("Tools/Write file")]
     private static void WriteString()
     {
         string path = "Assets/Resources/test.txt";
@@ -15,13 +14,11 @@ public class readnwrite
         writer.Close();
 
         //Re-import the file to update the reference in the editor
-        AssetDatabase.ImportAsset(path);
         TextAsset asset = Resources.Load<TextAsset>("test");
         //Print the text from the file
         Debug.Log(asset.text);
     }
-
-    [MenuItem("Tools/Read file")]
+    
     public static string ReadString(string path)
     {
         //string path = "Assets/Resources/test.txt";

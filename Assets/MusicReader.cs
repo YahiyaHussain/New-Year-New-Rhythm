@@ -22,6 +22,8 @@ public class MusicReader : MonoBehaviour
 
     AudioManager AM;
 
+    public TextAsset BnBeasy;
+
 
     noteInfo[] q;
     public void readNspawn()
@@ -139,7 +141,7 @@ public class MusicReader : MonoBehaviour
 
     private void compileMusic(string path)
     {
-        string data = readnwrite.ReadString(path);
+        string data = BnBeasy.text;
         string[] lines = data.Split('\n');
         nBeatFractions = int.Parse(lines[0]);
         nMeasures = int.Parse(lines[1]);

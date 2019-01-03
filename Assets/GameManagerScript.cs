@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManagerScript : MonoBehaviour
 {
     public static GameManagerScript Instance { get; private set; }
+    TextMeshProUGUI rating;
     private void Awake()
     {
         if (Instance == null) { Instance = this; } else { Debug.Log("Warning: multiple " + this + " in scene!"); }
+        rating = GameObject.FindGameObjectWithTag("RatingText").GetComponent<TextMeshProUGUI>(); 
     }
 
     public bool countDownDone = false;
@@ -49,23 +53,23 @@ public class GameManagerScript : MonoBehaviour
         float score = Mathf.Abs(note.position.sqrMagnitude - key.position.sqrMagnitude);
         if (score <  3)
         {
-            Debug.Log("perfect");
+            rating.text = "perfect";
         }
         else if(score < 6)
         {
-            Debug.Log("good");
+            rating.text = "good";
         }
         else if(score < 9)
         {
-            Debug.Log("ok");
+            rating.text = "ok";
         }
         else if(score < 12)
         {
-            Debug.Log("bad");
+            rating.text = "bad";
         }
         else
         {
-            Debug.Log("miss");
+            rating.text = "miss";
         }
     }
     
