@@ -127,7 +127,6 @@ public class GameManagerScript : MonoBehaviour
         note.localScale = new Vector3(0, 0, 0);
         MoveObjectTime MOT = note.GetComponent<MoveObjectTime>();
 
-        Debug.Log(note.position.sqrMagnitude - key.position.sqrMagnitude);
         float ratingf = Mathf.Abs(note.position.sqrMagnitude - key.position.sqrMagnitude);
         int streak = int.Parse(combo.text);
         if (streak > maxStreak) maxStreak = streak;
@@ -174,16 +173,16 @@ public class GameManagerScript : MonoBehaviour
         score.text = "" + scoref;
         combo.text = "" + streak;
     }
-
+    public Image EndGamePanel;
+    public TextMeshProUGUI finalScore;
     public void EndGame()
     {
-        Image EndGamePanel = GameObject.FindGameObjectWithTag("EndGamePanel").GetComponent<Image>();
+
         EndGamePanel.enabled = true;
         StartCoroutine(Opaquen(EndGamePanel));
-
         float grade = (perfectCount + .9f * goodCount + .75f * okCount + .6f * badCount + .45f * awfulCount) / totalCount;
 
-        TextMeshProUGUI finalScore = GameObject.FindGameObjectWithTag("FinalText").GetComponent<TextMeshProUGUI>();
+        
         string letter;
         if (grade >= 0.99) letter = "SS";
         else if (grade >= 0.95) letter = "S";

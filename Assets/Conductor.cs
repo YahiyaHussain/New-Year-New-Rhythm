@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Conductor : MonoBehaviour
 {
@@ -18,17 +19,23 @@ public class Conductor : MonoBehaviour
     // Start is called before the first frame update
     public bool playmusic;
     public bool sendblocks;
+    public TextMeshProUGUI text;
     void Start()
     {
         songPositions = new float[2];
     }
     int i = 0;
     int j = 0;
+    int k = 0;
     noteInfo nI;
     string song;
     private void Update()
     {
-
+        
+        if (songPositions[0] - 2 > MusicReader.Instance.music[MusicReader.Instance.music.Length - 1].songPos)
+        {
+            GameManagerScript.Instance.EndGame();
+        }
         if (playmusic && i < MusicReader.Instance.music.Length && MusicReader.Instance.music[i].songPos < songPositions[0] - (2))
         {
             if (i == 0)
@@ -41,7 +48,6 @@ public class Conductor : MonoBehaviour
                 
             }
             i++;
-            if (i == MusicReader.Instance.music.Length) { GameManagerScript.Instance.EndGame(); }
         }
         if (playmusic && j < MusicReader.Instance.music.Length && MusicReader.Instance.music[j].songPos < songPositions[0])
         {
