@@ -782,6 +782,24 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: BlipsandBlops2
+    clip: {fileID: 8300000, guid: ac94eb5d2f4e228499ff6aac0627c394, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ErictheElectric
+    clip: {fileID: 8300000, guid: a487d97d1ff79954c8a539823275f1fa, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Tango
+    clip: {fileID: 8300000, guid: 656550ed56346774faff76302297b463, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!4 &408241867
 Transform:
   m_ObjectHideFlags: 0
@@ -1633,8 +1651,12 @@ MonoBehaviour:
   BnBMedium: {fileID: 4900000, guid: 8af0a86e787b6624fbff685e70391699, type: 3}
   BnBEasy: {fileID: 4900000, guid: 4e5777d2fe192d0468683fb99a5e9a8c, type: 3}
   BnBHard: {fileID: 4900000, guid: c4e4783350c6ef74db0415e8835b2961, type: 3}
+  TangoEasy: {fileID: 4900000, guid: 7460b76720b824746b9dc3d3467e42e5, type: 3}
+  EricEasy: {fileID: 4900000, guid: 9e3bd306587342e4c9c74518172080c6, type: 3}
+  EricMedium: {fileID: 4900000, guid: 035776c6ef0d2ab47a46102b11537fa3, type: 3}
+  EricHard: {fileID: 4900000, guid: bf5de8e32bbb7e5468caba50cd7da8a8, type: 3}
   test: {fileID: 4900000, guid: 2e66a0dd3a072d04cb9f8188fc95ba74, type: 3}
-  map: 2
+  map: 8
 --- !u!4 &1118960794
 Transform:
   m_ObjectHideFlags: 0

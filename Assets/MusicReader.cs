@@ -10,7 +10,7 @@ public class MusicReader : MonoBehaviour
         if (Instance == null) { Instance = this; } else { Debug.Log("Warning: multiple " + this + " in scene!"); }
     }
     int nMeasures;
-    float secondsPerMeasure = 2f;
+    //float secondsPerMeasure = 2f;
     int nBeatFractions;
     public noteInfo[] music; // false means no sound is played then, true means there is
 
@@ -29,80 +29,15 @@ public class MusicReader : MonoBehaviour
     public void readNspawn(TextAsset t, string song)
     {
         
-        string path = "Assets/Resources/BnBeasy.txt";
         compileMusic(t);
-        q = new noteInfo[music.Length];
-        for (int i = 0; i < music.Length; i++)
-        {
-            q[0] = music[0];
-        }
+        
 
         AM = AudioManager.Instance;
-        //StartCoroutine(playMusicBetter());
-        //AM.Play("BlipsandBlops");
-        //StartCoroutine(waitThenPlay());
         StartCoroutine(Conductor.Instance.startConducting(0, song));
         Conductor.Instance.sendblocks = true;
         Conductor.Instance.playmusic = true;
-        //StartCoroutine(spawnBlocks());
     }
 
-    IEnumerator waitThenPlay()
-    {
-
-        yield return new WaitForSeconds(2);
-        AM.Play("BlipsandBlops");
-
-    }
-    IEnumerator spawnBlocks()
-    {
-        foreach(noteInfo nI in music)
-        {
-            float f = (float)AudioSettings.dspTime;
-            if (nI.isNote)
-            {            
-                foreach (pressType pT in nI.pT)
-                {
-                    MoveObjectTime t = null;
-                    switch (pT)
-                    {
-                        case pressType.a:
-                            t = ObjectPooler.Instance.poolDictionary["A"].Dequeue().GetComponent<MoveObjectTime>();
-                            t.transform.position = new Vector3(-4, .5f, 20);
-                            break;
-                        case pressType.b:
-                            t = ObjectPooler.Instance.poolDictionary["B"].Dequeue().GetComponent<MoveObjectTime>();
-                            t.transform.position = new Vector3(-2, .5f, 20);
-                            break;
-                        case pressType.c:
-                            t = ObjectPooler.Instance.poolDictionary["C"].Dequeue().GetComponent<MoveObjectTime>();
-                            t.transform.position = new Vector3(0, .5f, 20);
-                            break;
-                        case pressType.d:
-                            t = ObjectPooler.Instance.poolDictionary["D"].Dequeue().GetComponent<MoveObjectTime>();
-                            t.transform.position = new Vector3(2, .5f, 20);
-                            break;
-                        case pressType.e:
-                            t = ObjectPooler.Instance.poolDictionary["E"].Dequeue().GetComponent<MoveObjectTime>();
-                            t.transform.position = new Vector3(4, .5f, 20);
-                            break;
-                    }
-                    t.myInfo = nI;
-                    t.myType = pT;
-                    t.gameObject.SetActive(true);
-                    
-                    StartCoroutine(t.MoveToPosition(t.targetObject.transform.position, 2));
-                    //Debug.Log((float)AudioSettings.dspTime - f);                                     
-                }
-                yield return new WaitForSeconds(nI.noteLength - (float)AudioSettings.dspTime + f);
-            }
-            else
-            {
-                //Debug.Log(Time.time - f);
-                yield return new WaitForSeconds(nI.noteLength - (float)AudioSettings.dspTime + f);
-            }
-        }
-    }
     
 
     private void compileMusic(TextAsset text)
@@ -221,7 +156,7 @@ public class MusicReader : MonoBehaviour
 
                 //string s = tempLine[1];
             }
-            music[i - 2].noteLength = (int.Parse(tempLine[1]) / (float)nBeatFractions) * secondsPerMeasure;
+            music[i - 2].noteLength = (int.Parse(tempLine[1]) / (float)nBeatFractions) * (240 / Conductor.Instance.bpm);
             music[i - 2].songPos = pressTime;
             pressTime += music[i - 2].noteLength;
         }

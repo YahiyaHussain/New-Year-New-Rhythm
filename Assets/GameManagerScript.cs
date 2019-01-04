@@ -37,6 +37,10 @@ public class GameManagerScript : MonoBehaviour
     public TextAsset BnBMedium;
     public TextAsset BnBEasy;
     public TextAsset BnBHard;
+    public TextAsset TangoEasy;
+    public TextAsset EricEasy;
+    public TextAsset EricMedium;
+    public TextAsset EricHard;
     public TextAsset test;
     string song;
     public beatmap map;
@@ -47,16 +51,39 @@ public class GameManagerScript : MonoBehaviour
         switch (map)
         {
             case beatmap.BnbMedium:
+                Conductor.Instance.bpm = 120;
                 t = BnBMedium;
                 song = "BlipsandBlops";
                 break;
             case beatmap.BnBEasy:
+                Conductor.Instance.bpm = 120;
                 t = BnBEasy;
                 song = "BlipsandBlops";
                 break;
             case beatmap.BnbHard:
+                Conductor.Instance.bpm = 120;
                 t = BnBHard;
                 song = "BlipsandBlops";
+                break;
+            case beatmap.TangoEasy:
+                Conductor.Instance.bpm = 120;
+                t = TangoEasy;
+                song = "Tango";
+                break;
+            case beatmap.EricEasy:
+                Conductor.Instance.bpm = 160;
+                t = EricEasy;
+                song = "ErictheElectric";
+                break;
+            case beatmap.EricMedium:
+                Conductor.Instance.bpm = 160;
+                t = EricMedium;
+                song = "ErictheElectric";
+                break;
+            case beatmap.EricHard:
+                Conductor.Instance.bpm = 160;
+                t = EricHard;
+                song = "ErictheElectric";
                 break;
         }
 

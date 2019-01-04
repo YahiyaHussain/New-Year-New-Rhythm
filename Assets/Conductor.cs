@@ -29,7 +29,7 @@ public class Conductor : MonoBehaviour
     private void Update()
     {
 
-        if (playmusic && i < MusicReader.Instance.music.Length && MusicReader.Instance.music[i].songPos < songPositions[0] - 2)
+        if (playmusic && i < MusicReader.Instance.music.Length && MusicReader.Instance.music[i].songPos < songPositions[0] - (2))
         {
             if (i == 0)
             {
@@ -42,12 +42,14 @@ public class Conductor : MonoBehaviour
             }
             i++;
         }
-        if (sendblocks && j < MusicReader.Instance.music.Length && MusicReader.Instance.music[j].songPos < songPositions[0])
+        if (playmusic && j < MusicReader.Instance.music.Length && MusicReader.Instance.music[j].songPos < songPositions[0])
         {
+            
             if (MusicReader.Instance.music[j].isNote)
             {
                 float f = (float)AudioSettings.dspTime;
                 nI = MusicReader.Instance.music[j];
+
                 foreach (pressType pT in nI.pT)
                 {
                     MoveObjectTime t = null;
@@ -78,7 +80,7 @@ public class Conductor : MonoBehaviour
                     t.myType = pT;
                     t.gameObject.SetActive(true);
                     //Debug.Log((float)AudioSettings.dspTime - f);
-                    StartCoroutine(t.MoveToPosition(t.targetObject.transform.position, 2 - ((float)AudioSettings.dspTime - f) ));
+                    StartCoroutine(t.MoveToPosition(t.targetObject.transform.position, (2) - ((float)AudioSettings.dspTime - f) ));
                     //Debug.Log((float)AudioSettings.dspTime - f);                                     
                 }
             }

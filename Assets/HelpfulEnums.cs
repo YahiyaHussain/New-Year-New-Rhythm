@@ -16,7 +16,13 @@ public enum beatmap
 {
     BnbMedium,
     BnBEasy,
-    BnbHard
+    BnbHard,
+    TangoEasy,
+    TangoMedium,
+    TangoHard,
+    EricEasy,
+    EricMedium,
+    EricHard
 }
 
 public struct noteInfo
