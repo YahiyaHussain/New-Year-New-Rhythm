@@ -44,6 +44,14 @@ public class GameManagerScript : MonoBehaviour
     public TextAsset test;
     string song;
     public beatmap map;
+
+
+
+    public int perfectCount;
+    public int goodCount;
+    public int okCount;
+    public int badCount;
+    public int missCount;
     // Start is called before the first frame update
     void Start()
     {
