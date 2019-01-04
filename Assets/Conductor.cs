@@ -41,10 +41,11 @@ public class Conductor : MonoBehaviour
                 
             }
             i++;
+            if (i == MusicReader.Instance.music.Length) { GameManagerScript.Instance.EndGame(); }
         }
         if (playmusic && j < MusicReader.Instance.music.Length && MusicReader.Instance.music[j].songPos < songPositions[0])
         {
-            
+
             if (MusicReader.Instance.music[j].isNote)
             {
                 float f = (float)AudioSettings.dspTime;
@@ -80,15 +81,13 @@ public class Conductor : MonoBehaviour
                     t.myType = pT;
                     t.gameObject.SetActive(true);
                     //Debug.Log((float)AudioSettings.dspTime - f);
-                    StartCoroutine(t.MoveToPosition(t.targetObject.transform.position, (2) - ((float)AudioSettings.dspTime - f) ));
+                    StartCoroutine(t.MoveToPosition(t.targetObject.transform.position, (2) - ((float)AudioSettings.dspTime - f)));
                     //Debug.Log((float)AudioSettings.dspTime - f);                                     
                 }
             }
-            else
-            {
 
-            }
             j++;
+           
         }
     }
     private void FixedUpdate()

@@ -8,6 +8,8 @@ TagManager:
   - RatingText
   - ComboText
   - ScoreText
+  - EndGamePanel
+  - FinalText
   layers:
   - Default
   - TransparentFX

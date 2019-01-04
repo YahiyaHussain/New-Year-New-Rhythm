@@ -51,10 +51,23 @@ public class GameManagerScript : MonoBehaviour
     public int goodCount;
     public int okCount;
     public int badCount;
+    public int awfulCount;
     public int missCount;
+    public int totalCount;
+
+    public int maxStreak;
     // Start is called before the first frame update
     void Start()
     {
+
+        maxStreak = 0;
+        perfectCount = 0;
+        goodCount = 0;
+        okCount = 0;
+        badCount = 0;
+        awfulCount = 0;
+        missCount = 0;
+        totalCount = 0;
         TextAsset t = test;
         switch (map)
         {
@@ -110,43 +123,90 @@ public class GameManagerScript : MonoBehaviour
 
     public void hitNote(Transform note, Transform key)
     {
+        
         note.localScale = new Vector3(0, 0, 0);
         MoveObjectTime MOT = note.GetComponent<MoveObjectTime>();
 
         Debug.Log(note.position.sqrMagnitude - key.position.sqrMagnitude);
         float ratingf = Mathf.Abs(note.position.sqrMagnitude - key.position.sqrMagnitude);
         int streak = int.Parse(combo.text);
+        if (streak > maxStreak) maxStreak = streak;
         float scoref = float.Parse(score.text);
+        totalCount++;
         if (ratingf <  3)
         {
+            perfectCount++;
             scoref += 4 * streak;
             streak += 1;
             rating.text = "perfect";
         }
         else if(ratingf < 6)
         {
+            goodCount++;
             scoref += 3 * streak;
             streak += 1;
             rating.text = "good";
         }
         else if(ratingf < 9)
         {
+            okCount++;
             scoref += 2 * streak;
             streak += 1;
             rating.text = "ok";
         }
         else if(ratingf < 12)
         {
+            badCount++;
             scoref += 1 * streak;
             rating.text = "bad";
         }
+        else if(ratingf < 16)
+        {
+            awfulCount++;
+            rating.text = "awful";
+        }
         else
         {
+            missCount++;
             streak = 0;
             rating.text = "miss";
         }
         score.text = "" + scoref;
         combo.text = "" + streak;
+    }
+
+    public void EndGame()
+    {
+        Image EndGamePanel = GameObject.FindGameObjectWithTag("EndGamePanel").GetComponent<Image>();
+        EndGamePanel.enabled = true;
+        StartCoroutine(Opaquen(EndGamePanel));
+
+        float grade = (perfectCount + .9f * goodCount + .75f * okCount + .6f * badCount + .45f * awfulCount) / totalCount;
+
+        TextMeshProUGUI finalScore = GameObject.FindGameObjectWithTag("FinalText").GetComponent<TextMeshProUGUI>();
+        string letter;
+        if (grade >= 0.99) letter = "SS";
+        else if (grade >= 0.95) letter = "S";
+        else if (grade >= 0.9) letter = "A";
+        else if (grade >= 0.8) letter = "B";
+        else if (grade >= 0.7) letter = "C";
+        else if (grade >= 0.6) letter = "D";
+        else letter = "F";
+
+
+        if (maxStreak == totalCount)
+        {
+            finalScore.text = "HighScore:" + '\n' + score.text + '\n' + '\n' + "Rating:" + '\n' + letter + '\n' + '\n' + "MaxCombo:"+  '\n' + "FULL COMBO!";
+        }
+        finalScore.text = "HighScore:" + '\n' + score.text + '\n' + '\n'+"Rating:" + '\n' + letter + '\n' + '\n' + "MaxCombo:" + '\n'+ maxStreak + "/" + totalCount;
+    }
+    IEnumerator Opaquen(Image img)
+    {
+        for (int i = 0; i < 30; i++)
+        {
+            img.color = new Color(img.color.r, img.color.g, img.color.b, i / 30.0f);
+            yield return null;
+        }
     }
     
 }
