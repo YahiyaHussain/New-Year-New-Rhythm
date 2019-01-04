@@ -14,6 +14,7 @@ public class PauseMenu : MonoBehaviour {
     // Update is called once per frame
     // pause and resume game using esc
     void Update() {
+      GMS = GameObject.Find("GameManager").GetComponent<GameManagerScript>();
       if (Input.GetKeyDown(KeyCode.Escape)) {
         if (GameIsPaused) {
           Resume();
@@ -21,27 +22,25 @@ public class PauseMenu : MonoBehaviour {
           Pause();
         }
       }
+      // check if countdown is done, then resume game
+      if (GMS.countDownDone) {
+        Time.timeScale = 1f;
+      }
     }
 
     // resume function
     public void Resume() {
+      pauseMenuUI.SetActive(false);
+      GameIsPaused = false;
       GMS = GameObject.Find("GameManager").GetComponent<GameManagerScript>();
       GMS.countDownImage.SetActive(true);
-      if (GMS.countDownDone) {
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
-        GameIsPaused = false;
-      } else {
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
-        GameIsPaused = false;
-      }
     }
 
     // pause function
     void Pause() {
       GMS = GameObject.Find("GameManager").GetComponent<GameManagerScript>();
       GMS.countDownDone = false;
+      GMS.countDownImage.SetActive(false);
       pauseMenuUI.SetActive(true);
       Time.timeScale = 0f;
       GameIsPaused = true;
@@ -62,6 +61,6 @@ public class PauseMenu : MonoBehaviour {
 
     public void QuitGame() {
       Debug.Log("Quitting game...");
-      // Application.Quit()
+      Application.Quit()
     }
 }

@@ -35,7 +35,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // previews audio file
+    // plays audio file
     public void Play (string name) {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null) {
