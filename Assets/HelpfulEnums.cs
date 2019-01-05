@@ -22,7 +22,10 @@ public enum beatmap
     TangoHard,
     EricEasy,
     EricMedium,
-    EricHard
+    EricHard,
+    UnderwaterEasy,
+    UnderwaterMedium,
+    UnderwaterHard
 }
 
 public struct noteInfo
