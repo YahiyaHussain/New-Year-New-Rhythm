@@ -53,7 +53,7 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sound: " + name + " not found");
             return;
         }
-        s.source.Stop();
+        s.source.Pause();
     }
     public bool isPlaying (string name)
     {
