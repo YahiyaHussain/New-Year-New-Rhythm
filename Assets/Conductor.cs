@@ -20,6 +20,7 @@ public class Conductor : MonoBehaviour
     public bool playmusic;
     public bool sendblocks;
     public TextMeshProUGUI text;
+
     void Start()
     {
         songPositions = new float[2];
@@ -29,22 +30,28 @@ public class Conductor : MonoBehaviour
     int k = 0;
     noteInfo nI;
     string song;
+    bool onlyOnce = false;
     private void Update()
     {
         
-        if (songPositions[0] - 2 > MusicReader.Instance.music[MusicReader.Instance.music.Length - 1].songPos)
+        if (songPositions[0] - 2f > MusicReader.Instance.music[MusicReader.Instance.music.Length - 1].songPos)
         {
             GameManagerScript.Instance.EndGame();
+        }
+        if (!onlyOnce && songPositions[0] - 2f > -offset)
+        {
+            onlyOnce = true;
+            AudioManager.instance.Play(song);
         }
         if (playmusic && i < MusicReader.Instance.music.Length && MusicReader.Instance.music[i].songPos < songPositions[0] - (2))
         {
             if (i == 0)
             {
-                AudioManager.instance.Play(song);
+                //AudioManager.instance.Play(song);
             }
             if (MusicReader.Instance.music[i].isNote)
             {
-                //AudioManager.instance.Play("test");
+                AudioManager.instance.Play("test");
                 
             }
             i++;

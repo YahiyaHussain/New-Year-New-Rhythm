@@ -38,9 +38,11 @@ public class GameManagerScript : MonoBehaviour
     public TextAsset BnBEasy;
     public TextAsset BnBHard;
     public TextAsset TangoEasy;
+    public TextAsset TangoMedium;
     public TextAsset EricEasy;
     public TextAsset EricMedium;
     public TextAsset EricHard;
+    public TextAsset UnderwaterEasy;
     public TextAsset test;
     string song;
     public beatmap map;
@@ -88,11 +90,19 @@ public class GameManagerScript : MonoBehaviour
                 break;
             case beatmap.TangoEasy:
                 Conductor.Instance.bpm = 120;
+                Conductor.Instance.offset = 0.125f;
                 t = TangoEasy;
+                song = "Tango";
+                break;
+            case beatmap.TangoMedium:
+                Conductor.Instance.bpm = 120;
+                Conductor.Instance.offset = 0.125f;
+                t = TangoMedium;
                 song = "Tango";
                 break;
             case beatmap.EricEasy:
                 Conductor.Instance.bpm = 160;
+                Conductor.Instance.offset = 0f;
                 t = EricEasy;
                 song = "ErictheElectric";
                 break;
@@ -105,6 +115,12 @@ public class GameManagerScript : MonoBehaviour
                 Conductor.Instance.bpm = 160;
                 t = EricHard;
                 song = "ErictheElectric";
+                break;
+            case beatmap.UnderwaterEasy:
+                Conductor.Instance.bpm = 110;
+                Conductor.Instance.offset = 0.125f;
+                t = UnderwaterEasy;
+                song = "Underwater";
                 break;
         }
 
@@ -172,6 +188,7 @@ public class GameManagerScript : MonoBehaviour
         }
         score.text = "" + scoref;
         combo.text = "" + streak;
+        if (streak > maxStreak) maxStreak = streak;
     }
     public Image EndGamePanel;
     public TextMeshProUGUI finalScore;
