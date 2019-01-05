@@ -9,14 +9,35 @@ public class PauseMenu : MonoBehaviour {
     public static bool GameIsPaused = false;
 
     public GameObject pauseMenuUI;
+    public Image Countdown3;
+    public Image Countdown2;
+    public Image Countdown1;
 
-    public bool countDownDone = false;
+    private void Awake() {
+        StartCoroutine("Countdown");
+    }
 
     // Coroutine for countdown
-    IEnumerator DelayTime() {
-        yield return new WaitForSeconds(2f);
-        Debug.Log("Waited 2 seconds");
-        countDownDone = true;
+    IEnumerator Countdown() {
+        Time.timeScale = 0f;
+
+        Countdown3.enabled = true;
+        Debug.Log("3");
+        yield return new WaitForSecondsRealtime(1);
+        Countdown3.enabled = false;
+
+        Countdown2.enabled = true;
+        Debug.Log("2");
+        yield return new WaitForSecondsRealtime(1);
+        Countdown2.enabled = false;
+
+        Countdown1.enabled = true;
+        Debug.Log("1");
+        yield return new WaitForSecondsRealtime(1);
+        Countdown1.enabled = false;
+
+        Debug.Log("GO!");
+        Time.timeScale = 1f;
     }
 
     // Update is called once per frame
@@ -26,27 +47,24 @@ public class PauseMenu : MonoBehaviour {
         if (GameIsPaused) {
             Resume();
         } else {
-          Pause();
+            Pause();
         }
-      }
-      if (countDownDone) {
-        Time.timeScale = 1f;
       }
     }
 
     // resume function
     public void Resume() {
+        StartCoroutine("Countdown");
         pauseMenuUI.SetActive(false);
         GameIsPaused = false;
-        StartCoroutine("Delaytime");
     }
 
     // pause function
     void Pause() {
-      pauseMenuUI.SetActive(true);
-      Time.timeScale = 0f;
-      GameIsPaused = true;
-      countDownDone = false;
+        StopCoroutine("Countdown");
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        GameIsPaused = true;
     }
 
     public void LoadMenu() {
