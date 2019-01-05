@@ -10,62 +10,53 @@ public class PauseMenu : MonoBehaviour {
 
     public GameObject pauseMenuUI;
 
-    private GameManagerScript GMS;
+    public bool countDownDone = false;
+
+    // Coroutine for countdown
+    IEnumerator DelayTime() {
+        yield return new WaitForSeconds(2f);
+        Debug.Log("Waited 2 seconds");
+        countDownDone = true;
+    }
 
     // Update is called once per frame
     // pause and resume game using esc
     void Update() {
-      GMS = GameObject.Find("GameManager").GetComponent<GameManagerScript>();
       if (Input.GetKeyDown(KeyCode.Escape)) {
         if (GameIsPaused) {
-          Resume();
+            Resume();
         } else {
           Pause();
         }
       }
-      // check if countdown is done, then resume game
-      if (GMS.countDownDone) {
+      if (countDownDone) {
         Time.timeScale = 1f;
       }
     }
 
     // resume function
     public void Resume() {
-      pauseMenuUI.SetActive(false);
-      GameIsPaused = false;
-      GMS = GameObject.Find("GameManager").GetComponent<GameManagerScript>();
-      GMS.countDownImage.SetActive(true);
+        pauseMenuUI.SetActive(false);
+        GameIsPaused = false;
+        StartCoroutine("Delaytime");
     }
 
     // pause function
     void Pause() {
-      GMS = GameObject.Find("GameManager").GetComponent<GameManagerScript>();
-      GMS.countDownDone = false;
-      GMS.countDownImage.SetActive(false);
       pauseMenuUI.SetActive(true);
       Time.timeScale = 0f;
       GameIsPaused = true;
+      countDownDone = false;
     }
 
     public void LoadMenu() {
       Debug.Log("Loading menu...");
-      GMS = GameObject.Find("GameManager").GetComponent<GameManagerScript>();
-      if (!GMS.countDownDone) {
-        GMS.countDownDone = true;
-        GMS.countDownImage.SetActive(false);
-      }
       Time.timeScale = 1f;
-      // Once main menu is ready
-      // file/build settings/scenes to build
-      // SceneManagement.LoadScene(name of menu scene)
+      SceneManager.LoadScene("menu");
     }
 
     public void QuitGame() {
       Debug.Log("Quitting game...");
-<<<<<<< HEAD
       Application.Quit();
-=======
-        Application.Quit();
->>>>>>> 85c3434bf2517294735430ad8c71bc27d76d238f
     }
 }

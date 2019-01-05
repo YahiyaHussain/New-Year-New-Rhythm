@@ -20,9 +20,6 @@ public class GameManagerScript : MonoBehaviour
         score.text = "" + 0;
     }
 
-    public bool countDownDone = false;
-    public GameObject countDownImage;
-
     public KeyCode a;
     public KeyCode b;
     public KeyCode c;
@@ -115,9 +112,6 @@ public class GameManagerScript : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-      if (countDownDone) {
-        countDownImage.SetActive(false);
-      }
            
     }
 
