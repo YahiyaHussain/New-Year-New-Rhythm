@@ -142,34 +142,34 @@ public class GameManagerScript : MonoBehaviour
         if (streak > maxStreak) maxStreak = streak;
         float scoref = float.Parse(score.text);
         totalCount++;
-        if (ratingf <  3)
+        if (ratingf <  4)
         {
             perfectCount++;
             scoref += 4 * streak;
             streak += 1;
             rating.text = "perfect";
         }
-        else if(ratingf < 6)
+        else if(ratingf < 7)
         {
             goodCount++;
             scoref += 3 * streak;
             streak += 1;
             rating.text = "good";
         }
-        else if(ratingf < 9)
+        else if(ratingf < 10)
         {
             okCount++;
             scoref += 2 * streak;
             streak += 1;
             rating.text = "ok";
         }
-        else if(ratingf < 12)
+        else if(ratingf < 13)
         {
             badCount++;
             scoref += 1 * streak;
             rating.text = "bad";
         }
-        else if(ratingf < 16)
+        else if(ratingf < 17)
         {
             awfulCount++;
             rating.text = "awful";

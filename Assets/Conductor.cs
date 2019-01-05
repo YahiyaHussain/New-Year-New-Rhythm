@@ -38,7 +38,7 @@ public class Conductor : MonoBehaviour
         {
             GameManagerScript.Instance.EndGame();
         }
-        if (!onlyOnce && songPositions[0] - 2f > -offset)
+        if (playmusic && !onlyOnce && songPositions[0] - 2f > -offset)
         {
             onlyOnce = true;
             AudioManager.instance.Play(song);
@@ -51,7 +51,7 @@ public class Conductor : MonoBehaviour
             }
             if (MusicReader.Instance.music[i].isNote)
             {
-                AudioManager.instance.Play("test");
+                //AudioManager.instance.Play("test");
                 
             }
             i++;
@@ -114,8 +114,11 @@ public class Conductor : MonoBehaviour
         float dsptimesong = (float)AudioSettings.dspTime;
         while (true)
         {
-            songPositions[i] = (float)(AudioSettings.dspTime - dsptimesong) * pitch - offset;
-            yield return new WaitForEndOfFrame();
+            if (playmusic)
+            {
+                songPositions[i] = (float)(AudioSettings.dspTime - dsptimesong) * pitch - offset;
+                yield return new WaitForEndOfFrame();
+            }
         }
     }
 }
