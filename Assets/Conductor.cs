@@ -117,8 +117,9 @@ public class Conductor : MonoBehaviour
             if (playmusic)
             {
                 songPositions[i] = (float)(AudioSettings.dspTime - dsptimesong) * pitch - offset;
-                yield return new WaitForEndOfFrame();
+                
             }
+            yield return new WaitForEndOfFrame();
         }
     }
 }
