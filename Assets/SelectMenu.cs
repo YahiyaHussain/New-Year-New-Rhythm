@@ -14,9 +14,72 @@ public class SelectMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        chosenBeatmap = levelSelectionTracker.Instance.chosenBeatmap;
         Instance = this;
-        songText.text = "Blips and Blops";
-        diffText.text = "Easy";
+        switch (chosenBeatmap)
+        {
+            case beatmap.BnBEasy:
+                diffText.text = "Easy";
+                songText.text = "Blips and Blop";
+                chosenBeatmap = beatmap.UnderwaterEasy;
+                break;
+            case beatmap.BnbMedium:
+                diffText.text = "Medium";
+                songText.text = "Blips and Blop";
+                chosenBeatmap = beatmap.UnderwaterMedium;
+                break;
+            case beatmap.BnbHard:
+                diffText.text = "Hard";
+                songText.text = "Blips and Blop";
+                chosenBeatmap = beatmap.UnderwaterHard;
+                break;
+            case beatmap.UnderwaterEasy:
+                diffText.text = "Easy";
+                songText.text = "Underwater Flame";
+                chosenBeatmap = beatmap.TangoEasy;
+                break;
+            case beatmap.UnderwaterMedium:
+                diffText.text = "Medium";
+                songText.text = "Underwater Flame";
+                chosenBeatmap = beatmap.TangoMedium;
+                break;
+            case beatmap.UnderwaterHard:
+                diffText.text = "Hard";
+                songText.text = "Underwater Flame";
+                chosenBeatmap = beatmap.TangoHard;
+                break;
+            case beatmap.TangoEasy:
+                diffText.text = "Easy";
+                songText.text = "Tango of the Firework King";
+                chosenBeatmap = beatmap.EricEasy;
+                break;
+            case beatmap.TangoMedium:
+                diffText.text = "Medium";
+                songText.text = "Tango of the Firework King";
+                chosenBeatmap = beatmap.EricMedium;
+                break;
+            case beatmap.TangoHard:
+                diffText.text = "Hard";
+                songText.text = "Tango of the Firework King";
+                chosenBeatmap = beatmap.EricHard;
+                break;
+            case beatmap.EricEasy:
+                diffText.text = "Easy";
+                songText.text = "Eric the Electric";
+                chosenBeatmap = beatmap.BnBEasy;
+                break;
+            case beatmap.EricMedium:
+                diffText.text = "Medium";
+                songText.text = "Eric the Electric";
+                chosenBeatmap = beatmap.BnbMedium;
+                break;
+            case beatmap.EricHard:
+                diffText.text = "Hard";
+                songText.text = "Eric the Electric";
+                chosenBeatmap = beatmap.BnbHard;
+                break;
+        }
+
     }
     public void PlayGame()
     {

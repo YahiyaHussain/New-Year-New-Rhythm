@@ -1,6 +1,7 @@
 ﻿using UnityEngine.Audio;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
@@ -34,7 +35,13 @@ public class AudioManager : MonoBehaviour
             s.source.loop = s.loop;
         }
     }
-
+    private void Start()
+    {
+        foreach(AudioSource s in GetComponents<AudioSource>())
+        {
+            s.volume = levelSelectionTracker.Instance.volumeLevel;
+        }
+    }
     // plays audio file
     public void Play (string name) {
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -64,5 +71,28 @@ public class AudioManager : MonoBehaviour
             return false;
         }
         return s.source.isPlaying;
+    }
+    public void click()
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == "click");
+        if (s == null)
+        {
+            Debug.LogWarning("Sound: " + "click" + " not found");
+            return;
+        }
+        s.source.Play();
+    }
+    public void adjustvolume(float volume)
+    {
+        foreach (AudioSource s in GetComponents<AudioSource>())
+        {
+            s.volume = volume;
+        }
+    }
+    public void volumeslider()
+    {
+        float volume = GameObject.FindGameObjectWithTag("slider").GetComponent<Slider>().value;
+        adjustvolume(volume);
+        levelSelectionTracker.Instance.volumeLevel = volume;
     }
 }

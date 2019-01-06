@@ -5,10 +5,14 @@ using UnityEngine;
 public class pressKey : MonoBehaviour
 {
     public KeyCode k;
+    public Sprite[] buttons;
+    public int index;
+    private SpriteRenderer SR;
     // Start is called before the first frame update
     void Start()
     {
-        
+        buttons = Resources.LoadAll<Sprite>("button");
+        SR = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -16,7 +20,7 @@ public class pressKey : MonoBehaviour
     {
         if (Input.GetKeyDown(k))
         {
-            transform.localScale = new Vector3(1, .1f, 1);
+            SR.sprite = buttons[index + 5];
             Collider[] c = Physics.OverlapBox(transform.position, 0.8f* Vector3.one);
             if (c.Length > 0)
             {
@@ -27,7 +31,7 @@ public class pressKey : MonoBehaviour
         }
         if (Input.GetKeyUp(k))
         {
-            transform.localScale = Vector3.one;
+            SR.sprite = buttons[index];
         }
     }
 }

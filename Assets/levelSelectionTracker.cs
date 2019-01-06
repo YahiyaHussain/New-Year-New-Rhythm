@@ -9,12 +9,14 @@ public class levelSelectionTracker : MonoBehaviour
     public beatmap chosenBeatmap = beatmap.BnBEasy;
     public float offset = -10;
     public InputField I;
+    public float volumeLevel = 1;
     // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-        if (Instance == null) { Instance = this; } else { Destroy(Instance); Instance = this; }
+        if (Instance == null) { Instance = this; } else { Destroy(gameObject); }
         DontDestroyOnLoad(gameObject);
     }
+
     public void changeOffset()
     {
         offset = float.Parse(I.text);

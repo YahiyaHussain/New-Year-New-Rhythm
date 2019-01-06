@@ -10,6 +10,7 @@ TagManager:
   - ScoreText
   - EndGamePanel
   - FinalText
+  - slider
   layers:
   - Default
   - TransparentFX
