@@ -38,7 +38,7 @@ public class PauseMenu : MonoBehaviour {
     IEnumerator Countdown()
     {
         if (initialcountdown) {
-            Countdownbpm = 1f; // initial countdown before game starts
+            Countdownbpm = ((Conductor.Instance.bpm) / 240f); // initial countdown before game starts
         } else {
             Countdownbpm = ((Conductor.Instance.bpm) / 240f); // match countdown speed with music bpm after resuming
         }
@@ -63,27 +63,30 @@ public class PauseMenu : MonoBehaviour {
         Countdown1.enabled = false;
 
         //Debug.Log("GO!");
-        AudioManager.instance.Play(song);
+        if (!initialcountdown)
+            AudioManager.instance.Play(GameManagerScript.Instance.song);
+        Conductor.Instance.playmusic = true;
         Time.timeScale = 1f;
         initialcountdown = false;
     }
 
     // resume function
     public void Resume() {
-        StartCoroutine("Countdown");
-        pauseMenuUI.SetActive(false);
-        GameIsPaused = false;
+        Time.timeScale = 1f;
+        initialcountdown = true;
+        SceneManager.LoadScene(1);
     }
 
     // pause function
     void Pause() {
         AudioManager.instance.Stop(song);
+        Time.timeScale = 0f;
+        Conductor.Instance.playmusic = false;
         StopCoroutine("Countdown");
         Countdown3.enabled = false;
         Countdown2.enabled = false;
         Countdown1.enabled = false;
         pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
         GameIsPaused = true;
     }
 

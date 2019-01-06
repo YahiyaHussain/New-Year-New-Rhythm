@@ -33,9 +33,9 @@ public class MusicReader : MonoBehaviour
         
 
         AM = AudioManager.Instance;
-        StartCoroutine(Conductor.Instance.startConducting(0, song));
-        Conductor.Instance.sendblocks = true;
-        Conductor.Instance.playmusic = true;
+        //StartCoroutine(Conductor.Instance.startConducting(0, song));
+        //Conductor.Instance.sendblocks = true;
+        //Conductor.Instance.playmusic = true;
     }
 
     

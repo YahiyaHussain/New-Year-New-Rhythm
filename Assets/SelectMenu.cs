@@ -75,6 +75,7 @@ public class SelectMenu : MonoBehaviour
                 chosenBeatmap = beatmap.BnbHard;
                 break;
         }
+        levelSelectionTracker.Instance.chosenBeatmap = chosenBeatmap;
     }
 
     public void SongSelectionLeftArrow()
@@ -130,6 +131,7 @@ public class SelectMenu : MonoBehaviour
                 chosenBeatmap = beatmap.TangoHard;
                 break;
         }
+        levelSelectionTracker.Instance.chosenBeatmap = chosenBeatmap;
     }
 
     public void DifficultySelectionLeftArrow()
@@ -185,6 +187,7 @@ public class SelectMenu : MonoBehaviour
                 chosenBeatmap = beatmap.EricMedium;
                 break;
         }
+        levelSelectionTracker.Instance.chosenBeatmap = chosenBeatmap;
     }
     public void DifficultySelectionRightArrow()
     {
@@ -239,5 +242,6 @@ public class SelectMenu : MonoBehaviour
                 chosenBeatmap = beatmap.UnderwaterEasy;
                 break;
         }
+        levelSelectionTracker.Instance.chosenBeatmap = chosenBeatmap;
     }
 }
