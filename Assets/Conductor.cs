@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class Conductor : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class Conductor : MonoBehaviour
     int j = 0;
     int k = 0;
     noteInfo nI;
-    string song;
+    public string song; // referenced by pausemenu.cs
     bool onlyOnce = false;
     private void Update()
     {
@@ -38,7 +39,7 @@ public class Conductor : MonoBehaviour
         {
             GameManagerScript.Instance.EndGame();
         }
-        if (playmusic && !onlyOnce && songPositions[0] - 2f > -offset)
+        if (playmusic && !onlyOnce && songPositions[0] - 2f > -offset && !PauseMenu.initialcountdown) // wait for countdown to finish before starting music
         {
             onlyOnce = true;
             AudioManager.instance.Play(song);
