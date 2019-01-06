@@ -23,7 +23,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         // copies mp3 attributes into audio manager
         foreach (Sound s in sounds) {

@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1731901694514792}
+  m_IsPrefabAsset: 1
+--- !u!1 &1731901694514792
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4883868515761380}
+  - component: {fileID: 114220363725060452}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: AudioManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4883868515761380
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1731901694514792}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 56.723625, y: 34.01149, z: 49.65148}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114220363725060452
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1731901694514792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ba59f0220e9745ad892d1b978c5bbe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  music:
+  - name: OhComeAllYeHaunted
+    clip: {fileID: 8300000, guid: 850abe792444a334180e5933e5bbded9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: OHolyFright
+    clip: {fileID: 8300000, guid: 60d61a7a16a60b745a797c5a987070f6, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: KringleBellsIntro
+    clip: {fileID: 8300000, guid: 4e4b04f7ea23dfd46b270f55fed4802c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: KringleBellsMain
+    clip: {fileID: 8300000, guid: f9e0b05245ab63b47908c5def9a45204, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  sounds:
+  - name: MenuClick
+    clip: {fileID: 8300000, guid: eb18e28a0b49b44458f0c7d395434356, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ChristmasLose
+    clip: {fileID: 8300000, guid: 4473ca890a68dd84385256fb3e1cf9d0, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ChristmasWin
+    clip: {fileID: 8300000, guid: 9fd7d76692a8c8540b46f3c50dc70cd4, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Hallolose
+    clip: {fileID: 8300000, guid: 739a37d159465bd42bccd64fa29f3e00, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Hallowin
+    clip: {fileID: 8300000, guid: e5b6a46d91c157740b01422d74dcd5b9, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ChristmasTakeover1
+    clip: {fileID: 8300000, guid: df3784771a48a514dbe543afc11ab53f, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ChristmasTakeover2
+    clip: {fileID: 8300000, guid: df3784771a48a514dbe543afc11ab53f, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: HalloweenTakeover1
+    clip: {fileID: 8300000, guid: 9cbcef3b0e4eb8244975ee88007e16da, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: HalloweenTakeover2
+    clip: {fileID: 8300000, guid: 265df183043f8fe478c76fb49211f740, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Boom
+    clip: {fileID: 8300000, guid: 41885fd0cb0a3ab4aa3f24eb270ac42d, type: 3}
+    volume: 0.219
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Falling
+    clip: {fileID: 8300000, guid: 48a2daa87c50c98458b2bb3be956b2ac, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  currentBeat: 0
+  bps: 0

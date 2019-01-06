@@ -68,6 +68,7 @@ public class GameManagerScript : MonoBehaviour
         missCount = 0;
         totalCount = 0;
         TextAsset t = test;
+        map = levelSelectionTracker.Instance.chosenBeatmap;
         switch (map)
         {
             case beatmap.BnbMedium:
@@ -154,20 +155,20 @@ public class GameManagerScript : MonoBehaviour
             streak += 1;
             rating.text = "good";
         }
-        else if(ratingf < 10)
+        else if(ratingf < 12)
         {
             okCount++;
             scoref += 2 * streak;
             streak += 1;
             rating.text = "ok";
         }
-        else if(ratingf < 13)
+        else if(ratingf < 15)
         {
             badCount++;
             scoref += 1 * streak;
             rating.text = "bad";
         }
-        else if(ratingf < 17)
+        else if(ratingf < 19)
         {
             awfulCount++;
             rating.text = "awful";
