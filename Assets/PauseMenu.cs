@@ -12,44 +12,60 @@ public class PauseMenu : MonoBehaviour {
     public Image Countdown3;
     public Image Countdown2;
     public Image Countdown1;
+    public float Countdownbpm;
+    public static bool initialcountdown = true;
+    public string song;
 
-    private void Awake() {
+    // inital countdown
+    private void Start() {
         StartCoroutine("Countdown");
-    }
-
-    // Coroutine for countdown
-    IEnumerator Countdown() {
-        Time.timeScale = 0f;
-
-        Countdown3.enabled = true;
-        Debug.Log("3");
-        yield return new WaitForSecondsRealtime(1);
-        Countdown3.enabled = false;
-
-        Countdown2.enabled = true;
-        Debug.Log("2");
-        yield return new WaitForSecondsRealtime(1);
-        Countdown2.enabled = false;
-
-        Countdown1.enabled = true;
-        Debug.Log("1");
-        yield return new WaitForSecondsRealtime(1);
-        Countdown1.enabled = false;
-
-        Debug.Log("GO!");
-        Time.timeScale = 1f;
     }
 
     // Update is called once per frame
     // pause and resume game using esc
     void Update() {
-      if (Input.GetKeyDown(KeyCode.Escape)) {
-        if (GameIsPaused) {
-            Resume();
-        } else {
-            Pause();
+        song = Conductor.Instance.song;
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            if (GameIsPaused) {
+                Resume();
+        }   else {
+                Pause();
         }
       }
+    }
+
+    // Coroutine for countdown
+    IEnumerator Countdown()
+    {
+        if (initialcountdown) {
+            Countdownbpm = 1f; // initial countdown before game starts
+        } else {
+            Countdownbpm = ((Conductor.Instance.bpm) / 240f); // match countdown speed with music bpm after resuming
+        }
+        Time.timeScale = 0f;
+
+        AudioManager.Instance.Play("test");
+        Countdown3.enabled = true;
+        //Debug.Log("3");
+        yield return new WaitForSecondsRealtime(Countdownbpm);
+        Countdown3.enabled = false;
+
+        AudioManager.Instance.Play("test");
+        Countdown2.enabled = true;
+        //Debug.Log("2");
+        yield return new WaitForSecondsRealtime(Countdownbpm);
+        Countdown2.enabled = false;
+
+        AudioManager.Instance.Play("test");
+        Countdown1.enabled = true;
+        //Debug.Log("1");
+        yield return new WaitForSecondsRealtime(Countdownbpm);
+        Countdown1.enabled = false;
+
+        //Debug.Log("GO!");
+        AudioManager.instance.Play(song);
+        Time.timeScale = 1f;
+        initialcountdown = false;
     }
 
     // resume function
@@ -61,7 +77,11 @@ public class PauseMenu : MonoBehaviour {
 
     // pause function
     void Pause() {
+        AudioManager.instance.Stop(song);
         StopCoroutine("Countdown");
+        Countdown3.enabled = false;
+        Countdown2.enabled = false;
+        Countdown1.enabled = false;
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
