@@ -30,11 +30,11 @@ public class MoveObjectTime : MonoBehaviour
         {
             var targetPosition = targetObject.GetComponent<Transform>();
 
-            StartCoroutine(MoveToPosition(targetPosition.position, timeToReachTarget));
+            //StartCoroutine(MoveToPosition(targetPosition.position, timeToReachTarget));
         }
     }
 
-    public IEnumerator MoveToPosition(Vector3 position, float timeToMove)
+    public IEnumerator MoveToPosition(Vector3 position, float timeToMove, bool isRocket)
     {
         position =  .1f*(position - transform.position) + position;
         timeToMove = 1.1f * timeToMove;
@@ -47,8 +47,14 @@ public class MoveObjectTime : MonoBehaviour
         isCurrentlyMoving = true;
         var currentPos = transform.position;
         var t = 0f;
+        bool onlyOnce= false;
         while (t < 1)
         {
+            if(!onlyOnce && transform.localScale.z == 0)
+            {
+                onlyOnce = true;
+                //position = currentPos + Vector3.up * 2;
+            }
             t += Time.deltaTime / timeToMove;
             transform.position = Vector3.Lerp(currentPos, position, t);
 
@@ -75,10 +81,12 @@ public class MoveObjectTime : MonoBehaviour
                 s = "E";
                 break;
         }
-        if (transform.localScale.magnitude > 0.1f)
+        if (transform.localScale.magnitude > 0.1f && !isRocket)
         {
+            Debug.Log("WHAT");
             GameManagerScript.Instance.hitNote(transform, targetObject.transform);
         }
+        
         ObjectPooler.Instance.poolDictionary[s].Enqueue(gameObject);
         isCurrentlyMoving = false;
         gameObject.SetActive(false);
