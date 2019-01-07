@@ -12,9 +12,11 @@ public class PauseMenu : MonoBehaviour {
     public Image Countdown3;
     public Image Countdown2;
     public Image Countdown1;
-    public float Countdownbpm;
+    public Button HTPTitle;
+    public Button HTPText;
+    float Countdownbpm;
     public static bool initialcountdown = true;
-    public string song;
+    string song;
 
     // inital countdown
     private void Start() {
@@ -37,8 +39,24 @@ public class PauseMenu : MonoBehaviour {
     // Coroutine for countdown
     IEnumerator Countdown()
     {
-        Countdownbpm = ((Conductor.Instance.bpm) / 240f);
         Time.timeScale = 0f;
+
+        // how to play instructions
+        if (initialcountdown) { 
+            Countdownbpm = 1f;
+
+            AudioManager.Instance.Play("test");
+            HTPTitle.enabled = true; // How to play title
+            yield return new WaitForSecondsRealtime(3);
+
+            AudioManager.Instance.Play("test");
+            HTPText.enabled = true; // How to play text
+            yield return new WaitForSecondsRealtime(5);
+
+            HTPTitle.enabled = false;
+            HTPText.enabled = false;
+        }
+        else { Countdownbpm = ((Conductor.Instance.bpm) / 240f); }
 
         AudioManager.Instance.Play("test");
         Countdown3.enabled = true;
