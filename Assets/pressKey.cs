@@ -11,7 +11,7 @@ public class pressKey : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        buttons = Resources.LoadAll<Sprite>("button");
+        //buttons = Resources.LoadAll<Sprite>("button");
         SR = GetComponent<SpriteRenderer>();
     }
 
@@ -20,7 +20,7 @@ public class pressKey : MonoBehaviour
     {
         if (Input.GetKeyDown(k))
         {
-            SR.sprite = buttons[index + 5];
+            SR.sprite = buttons[index+1];
             Collider[] c = Physics.OverlapBox(transform.position, 0.8f* Vector3.one);
             if (c.Length > 0)
             {

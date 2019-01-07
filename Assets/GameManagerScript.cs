@@ -10,8 +10,12 @@ public class GameManagerScript : MonoBehaviour
     TextMeshProUGUI rating;
     TextMeshProUGUI combo;
     TextMeshProUGUI score;
-    
-    
+
+    public ParticleSystem Green;
+    public ParticleSystem Red;
+    public ParticleSystem Blue;
+    public ParticleSystem Purple;
+    public ParticleSystem Yellow;
 
     public KeyCode a;
     public KeyCode b;
@@ -189,17 +193,22 @@ public class GameManagerScript : MonoBehaviour
             {
                 case pressType.a:
                     s = "A";
+                    Green.Emit(1);
                     break;
                 case pressType.b:
+                    Red.Emit(1);
                     s = "B";
                     break;
                 case pressType.c:
+                    Blue.Emit(1);
                     s = "C";
                     break;
                 case pressType.d:
+                    Purple.Emit(1);
                     s = "D";
                     break;
                 case pressType.e:
+                    Yellow.Emit(1);
                     s = "E";
                     break;
             }

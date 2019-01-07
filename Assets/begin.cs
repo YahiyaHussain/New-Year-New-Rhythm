@@ -15,9 +15,9 @@ public class begin : MonoBehaviour
 
     IEnumerator timeThings()
     {
-
+        Debug.Log(Time.deltaTime);
         AudioManager.Instance.Play("startup");
-        for (int i = 0; i < 60; i++)
+        for (int i = 0; i < 200; i++)
         {
             if (Input.anyKey)
             {
@@ -30,9 +30,10 @@ public class begin : MonoBehaviour
             }
             Debug.Log(i);
             Logo.color = Logo.color + new Color(0, 0, 0, i / 60.0f);
-            yield return new WaitForSeconds(.05f);
+            yield return null;
         }
-        for (int i = 60; i >= 0; i--)
+        Debug.Log("escaped");
+        for (int i = 200; i >= 0; i--)
         {
             if (Input.anyKey)
             {
@@ -45,7 +46,7 @@ public class begin : MonoBehaviour
             }
             Logo.color = Logo.color - new Color(0, 0, 0, i / 60.0f);
 
-            yield return new WaitForSeconds(.05f);
+            yield return null;
         }
         AudioManager.Instance.Play("title");
         black.enabled = false;
